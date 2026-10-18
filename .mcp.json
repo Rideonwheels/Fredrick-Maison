@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "retell": {
+      "command": "sh",
+      "args": ["scripts/mcp-with-env.sh", "npx", "-y", "@retell-ai/mcp-server@6.2.8"]
+    }
+  }
+}

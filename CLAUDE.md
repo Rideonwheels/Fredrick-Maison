@@ -38,6 +38,29 @@ client's AI receptionist end to end.
 7. **Always report at the end** using the format below: what you built, what
    you assumed, and what you could not do.
 
+## Platforms & API keys (permanent rule)
+
+Whenever the operator gives a platform and an API key, do all of this without asking:
+
+1. **Save the key to `.env`** as `<PLATFORM>_API_KEY=<value>` (e.g. `RETELL_API_KEY`).
+   `.env` is gitignored, so never commit it and never echo the key in reports. Add the variable
+   name (with no value) to `.env.example`.
+2. **Connect the platform's MCP server if it has one.** Prefer the official package.
+   Add it to `.mcp.json`, launched through `scripts/mcp-with-env.sh` so the key comes
+   from `.env`, never from the JSON. Start it once to confirm it lists its tools.
+3. **If there is no MCP server, use its REST API** (curl or the official SDK), with the key
+   read from `.env`.
+4. **Research the platform unless `docs/<platform>.md` already covers it**: access,
+   architecture, build recipe, endpoints, pricing, limits, gotchas, sources, and a
+   "Last verified" date.
+5. Report what was connected and what could not be (for example a network block or a missing runtime).
+
+Current platforms:
+
+| Platform | Use | Key | Access | Docs |
+|---|---|---|---|---|
+| Retell AI | Voice (default) | `RETELL_API_KEY` | MCP `retell` (official `@retell-ai/mcp-server`), REST fallback | `docs/retell.md` |
+
 ## Build workflow
 
 1. **Intake** — read the operator's client description. Create
